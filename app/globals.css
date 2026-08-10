@@ -145,3 +145,164 @@ textarea {
     border-left: 1px solid rgba(37,25,20,0.1);
   }
 }
+
+.tales-desk {
+  position: relative;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.lamp-glaze {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 52% 44%, rgba(255,245,214,0.12), transparent 30%),
+    linear-gradient(90deg, rgba(38,20,13,0.68), rgba(38,20,13,0.06) 42%, rgba(38,20,13,0.74));
+}
+
+.tales-nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px clamp(18px, 4vw, 54px);
+  color: #fff6e5;
+}
+.tales-nav h1 { font-size: 31px; font-weight: 900; }
+.tales-nav p { font-family: Arial, sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: rgba(255,246,229,0.7); }
+.tales-nav button {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  background: #fff6e5;
+  padding: 0 16px;
+  color: #2b1711;
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+}
+
+.manuscript {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-areas: "title title" "left right";
+  gap: 18px;
+  margin: 8vh auto 0;
+  width: min(900px, calc(100% - 32px));
+  animation: page-breathe 7s ease-in-out infinite;
+}
+
+.chapter-title { grid-area: title; }
+.page-left { grid-area: left; }
+.page-right { grid-area: right; }
+
+.chapter-title,
+.page-left,
+.page-right,
+.canon-ribbon,
+.chapter-proof {
+  border: 1px solid rgba(43,23,17,0.16);
+  background: rgba(255,248,233,0.86);
+  box-shadow: 0 18px 50px rgba(43,23,17,0.2);
+}
+
+.chapter-title,
+.page-left,
+.page-right {
+  display: grid;
+  gap: 10px;
+  border-radius: 10px;
+  padding: 18px;
+}
+
+.manuscript span,
+.canon-ribbon span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a3154;
+}
+
+.chapter-title input,
+.manuscript textarea {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  outline: 0;
+}
+.chapter-title input { font-size: 38px; font-weight: 900; }
+.manuscript textarea { min-height: 210px; resize: none; font-size: 22px; line-height: 1.55; }
+
+.canon-ribbon {
+  position: absolute;
+  z-index: 3;
+  right: clamp(18px, 5vw, 70px);
+  top: 124px;
+  display: grid;
+  gap: 12px;
+  width: 190px;
+  border-radius: 0 0 20px 20px;
+  background: #8a3154;
+  padding: 18px;
+  color: #fff6e5;
+}
+.canon-ribbon a { font-family: Arial, sans-serif; font-weight: 900; color: #fff6e5; }
+.canon-ribbon span { color: #ffd4df; }
+.canon-ribbon code { overflow-wrap: anywhere; font-family: var(--font-geist-mono); font-size: 10px; color: #ffd4df; }
+
+.tales-actions {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+.tales-actions button {
+  min-height: 52px;
+  border-radius: 8px;
+  background: #8a3154;
+  padding: 0 18px;
+  color: #fff6e5;
+  font-family: Arial, sans-serif;
+  font-weight: 900;
+  transition: transform 180ms ease;
+}
+.tales-actions button:first-child { background: #ffd4df; color: #2b1711; }
+.tales-actions button:nth-child(2) { background: #fff6e5; color: #2b1711; }
+.tales-actions button:hover:not(:disabled) { transform: translateY(-3px) rotate(-1deg); }
+.tales-actions button:disabled { opacity: 0.45; }
+
+.chapter-proof {
+  position: absolute;
+  z-index: 3;
+  left: clamp(18px, 5vw, 70px);
+  bottom: 28px;
+  display: grid;
+  gap: 10px;
+  width: min(290px, calc(100vw - 36px));
+  border-radius: 18px;
+  padding: 16px;
+}
+.chapter-proof a { display: flex; justify-content: space-between; gap: 8px; color: #8a3154; font-family: Arial, sans-serif; font-size: 13px; font-weight: 800; }
+.chapter-proof p { color: rgba(43,23,17,0.55); }
+.tales-error { position: relative; z-index: 2; margin: 12px auto; max-width: 860px; border-radius: 10px; background: #fee2e2; padding: 12px; color: #991b1b; }
+
+@keyframes page-breathe {
+  0%, 100% { transform: translateY(0) rotate(-0.2deg); }
+  50% { transform: translateY(-6px) rotate(0.2deg); }
+}
+
+@media (max-width: 900px) {
+  .tales-desk { overflow: auto; }
+  .manuscript { grid-template-areas: "title" "left" "right"; margin-top: 24px; }
+  .canon-ribbon,
+  .chapter-proof { position: relative; inset: auto; margin: 16px auto; width: min(460px, calc(100vw - 32px)); }
+}
