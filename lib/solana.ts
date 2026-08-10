@@ -5,7 +5,7 @@ import { Buffer } from "buffer";
 
 const DEVNET_RPC = "https://api.devnet.solana.com";
 const MAGICBLOCK_ER_RPC = "https://devnet.magicblock.app";
-const MEMO_PROGRAM_ID = new PublicKey("MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr");
+export const PROJECT_PROGRAM_ID = new PublicKey("9pxVnueG82fUQHBtvV8co5HDKQEjVrEEq2NABEs5ny1G");
 
 type SolanaProvider = { publicKey?: PublicKey; connect: () => Promise<{ publicKey: PublicKey }>; signAndSendTransaction: (transaction: Transaction) => Promise<{ signature: string }> };
 
@@ -13,6 +13,7 @@ declare global { interface Window { solana?: SolanaProvider } }
 
 export const shortKey = (key: string) => `${key.slice(0, 4)}...${key.slice(-4)}`;
 export const explorerTx = (signature: string) => `https://explorer.solana.com/tx/${signature}?cluster=devnet`;
+export const explorerAddress = (address = PROJECT_PROGRAM_ID.toBase58()) => `https://explorer.solana.com/address/${address}?cluster=devnet`;
 export const hashPayload = (payload: string) => bytesToHex(sha256(new TextEncoder().encode(payload)));
 
 export async function connectWallet() {
@@ -24,7 +25,7 @@ export async function sendMemoProof(route: "MagicBlock ER" | "Solana Devnet", me
   if (!window.solana?.publicKey) throw new Error("Wallet is not connected");
   const endpoint = route === "MagicBlock ER" ? MAGICBLOCK_ER_RPC : DEVNET_RPC;
   const connection = new Connection(endpoint, "confirmed");
-  const transaction = new Transaction().add(new TransactionInstruction({ keys: [], programId: MEMO_PROGRAM_ID, data: Buffer.from(memo, "utf8") }));
+  const transaction = new Transaction().add(new TransactionInstruction({ keys: [], programId: PROJECT_PROGRAM_ID, data: Buffer.from(memo, "utf8") }));
   transaction.feePayer = window.solana.publicKey;
   transaction.recentBlockhash = (await connection.getLatestBlockhash("confirmed")).blockhash;
   const { signature } = await window.solana.signAndSendTransaction(transaction);
