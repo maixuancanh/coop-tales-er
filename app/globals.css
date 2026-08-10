@@ -11,3 +11,30 @@
 
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--background); color: var(--foreground); }
+
+@keyframes page-float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-0.5deg); }
+  50% { transform: translate3d(0, -16px, 0) rotate(1deg); }
+}
+
+@keyframes canon-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes path-glow {
+  0%, 100% { opacity: 0.28; transform: scaleX(0.96); }
+  50% { opacity: 0.8; transform: scaleX(1); }
+}
+
+.storybook-bg {
+  background:
+    radial-gradient(circle at 20% 18%, rgba(244,114,182,0.22), transparent 28%),
+    radial-gradient(circle at 80% 78%, rgba(250,204,21,0.18), transparent 32%),
+    linear-gradient(135deg, rgba(36,20,47,0.05), rgba(244,114,182,0.06));
+}
+
+.page-float { animation: page-float 6s ease-in-out infinite; }
+.canon-card { background-size: 220% 220%; animation: canon-shimmer 8s ease infinite; }
+.path-glow { animation: path-glow 3s ease-in-out infinite; transform-origin: center; }
